@@ -1,0 +1,15 @@
+.env
+.env.local
+.env.production
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+.next/
+.DS_Store
+.claude/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+embeddings.json
+/tmp/

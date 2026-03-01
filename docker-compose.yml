@@ -1,0 +1,29 @@
+services:
+  backend:
+    build:
+      context: fastapi_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DOCS_DIR: /app/docs_data
+    volumes:
+      - ./fastapi_backend:/app
+      - fastapi-venv:/app/.venv
+      - ./docs_data:/app/docs_data
+
+  frontend:
+    build:
+      context: ./nextjs-frontend
+    user: node
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://backend:8000
+    volumes:
+      - ./nextjs-frontend:/app
+      - nextjs-node-modules:/app/node_modules
+
+volumes:
+  nextjs-node-modules:
+  fastapi-venv:

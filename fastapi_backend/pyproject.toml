@@ -1,0 +1,30 @@
+[project]
+name = "doc-updater"
+version = "0.1.0"
+description = "AI-powered documentation updater"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.0,<0.116",
+    "pydantic-settings>=2.5.2,<3",
+    "openai>=1.0.0",
+    "numpy>=2.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.1.0,<0.2",
+    "python-dotenv>=1.0.1,<2",
+    "pytest>=8.3.3,<9",
+    "pytest-asyncio>=0.24.0,<1",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = ["ai: tests that call OpenAI API (slow, costs money)"]
+
+[tool.uv]
+package = false
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
