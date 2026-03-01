@@ -1,0 +1,19 @@
+FROM node:20-slim
+
+WORKDIR /app
+
+RUN npm install -g pnpm
+
+COPY nextjs-frontend/package.json nextjs-frontend/pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+COPY nextjs-frontend/ .
+
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
+RUN pnpm run build
+
+EXPOSE 3000
+
+CMD ["pnpm", "start"]
