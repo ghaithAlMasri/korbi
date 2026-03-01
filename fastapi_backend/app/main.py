@@ -1,3 +1,4 @@
+import asyncio
 from contextlib import asynccontextmanager
 from openai import AsyncOpenAI, APIError
 from fastapi import FastAPI
@@ -16,7 +17,7 @@ async def lifespan(app: FastAPI):
     client = AsyncOpenAI(api_key=settings.openai_api_key)
     embedding_svc = EmbeddingService(client)
     deps.init(client, embedding_svc)
-    await embedding_svc.startup()
+    asyncio.create_task(embedding_svc.startup())
     yield
 
 
